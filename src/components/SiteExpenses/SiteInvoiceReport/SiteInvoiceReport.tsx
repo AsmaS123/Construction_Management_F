@@ -152,15 +152,20 @@ const SiteInvoiceReport  = (props:any) => {
                 </Breadcrumbs>
               </div>
               {/* <br/> */}
-              <div  id="invoice">
-              <Paper
+
+              <div  id="invoice" style={{ backgroundImage: `url('/letter_head.png')`,  height: '130vh',backgroundSize: 'cover',
+    backgroundPosition: 'right',zIndex:999}}>
+              {/* <Paper
                 sx={{display: "flex", flexDirection: "column" }}
               >
                  <header style={{backgroundColor:'#b8ddcb',margin:'0px', padding:'5px 5px 5px 5px', height:'100px',borderBottom:'5px solid gray'}}><div style={{padding:'1% '}}><p style={{fontSize:'12px'}}>Dream House Constrction, <br/>Latur Plaza, <br/>contact no : 1234567890 </p><p  style={{float:'right',marginTop:'-7%'}}><img src="/logo.jpg" alt="Example" width="70"/></p> </div></header>
-                </Paper>
-              <Paper
-                sx={{ p: 2, display: "flex", flexDirection: "column" }}
+                </Paper> */}
+                <br/> <br/> <br/> <br/> <br/> <br/> <br/>
+              <div className='flex-container'
+                 
               >
+                <div>sdc</div>
+                <div>
                 <h3>{invoiceDetails && invoiceDetails.site_name} Site Invoice</h3>
          
                     <p><b> Site ID</b> : {invoiceDetails && invoiceDetails.site_id} ,&nbsp; &nbsp;&nbsp; &nbsp;<b> Site Type </b>: {invoiceDetails && invoiceDetails.site_type}, &nbsp; &nbsp; &nbsp; &nbsp;<b> Site Name </b>: {invoiceDetails && invoiceDetails.site_name}, &nbsp; &nbsp;&nbsp; &nbsp;<b> Site Engineer Name </b> : {invoiceDetails && invoiceDetails.site_engineer_name},
@@ -218,8 +223,8 @@ const SiteInvoiceReport  = (props:any) => {
                 <p>
                 <b> Total </b> : {total && total.totalAmount} ,&nbsp; &nbsp; &nbsp; &nbsp;
                   <b> Total Credited </b> : {total && total.creditTotal} ,&nbsp; &nbsp; &nbsp; &nbsp; <b> Total  Debited </b>: {total && total.debitTotal}</p>
-        
-              </Paper>
+                </div>       
+              </div>
               {/* <footer style={{backgroundColor:'#b8ddcb',marginTop:'-2%',padding:'5px 5px 5px 5px', height:'50px'}}><p>contact no : </p></footer> */}
               </div>
             </Grid>

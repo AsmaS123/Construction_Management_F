@@ -18,20 +18,69 @@ import GetUserRoles from '../CustomHook/GetUserRoles/GetUserRoles';
 const defaultTheme = createTheme();
 
 export default function ChatBot() {
+  const styles = {
+    chatContainer: {
+      // width: '300px',
+      // height: '400px',
+      border: '1px solid #ccc',
+      // display: 'flex',
+      // flexDirection:'column',
+      // flexDirection: 'column',
+      fontFamily: 'Arial, sans-serif'
+    },
+    messages: {
+      flex: 1,
+      padding: '10px',
+      // overflowY: 'auto',
+      // display: 'flex',
+      // flexDirection: 'column',
+      gap: '5px'
+    },
+    message: {
+      maxWidth: '70%',
+      padding: '8px 12px',
+      borderRadius: '10px',
+      border: '1px solid #ddd'
+    },
+    inputContainer: {
+      display: 'flex',
+      padding: '10px',
+      borderTop: '1px solid #ccc'
+    },
+    input: {
+      flex: 1,
+      padding: '8px',
+      fontSize: '14px'
+    },
+    button: {
+      marginLeft: '10px',
+      padding: '8px 12px'
+    }
+  };
+  
   const [loading, setLoading] = useState(true);
-  // const navigate = useNavigate();
-  // debugger
-  // let user:any = useSelector((state) => state );
-
   useEffect(() => {
-    // debugger
-    // if(user && !user.email){
-    //   const email :any= Cookies.get('useremail'); 
-    //   const temp  = GetUserRoles(email);
-    //   console.log(temp.data,'temp.data');
-    //   user = temp.data
-    // }
   }, []);
+
+  const [messages, setMessages] = useState([
+    { sender: 'bot', text: 'Hi! How can I help you?' }
+  ]);
+  const [input, setInput] = useState('');
+
+  const handleSend = () => {
+    if (!input.trim()) return;
+
+    const newUserMessage = { sender: 'user', text: input };
+    setMessages(prev => [...prev, newUserMessage]);
+
+    // Simulate bot response
+    setTimeout(() => {
+      const botMessage = { sender: 'bot', text: `You said: "${input}"` };
+      setMessages(prev => [...prev, botMessage]);
+    }, 1000);
+
+    setInput('');
+  };
 
   return (
     <>
@@ -60,9 +109,31 @@ export default function ChatBot() {
                     <Paper
                       sx={{ p: 2, display: "flex", flexDirection: "column" }}
                     >
-                      {/* {user.email} */}
-                      {/* <button onClick={fetchProfile}>Click Me!</button> */}
-                      {/* <button onClick={getCookie}>get cookie!</button> */}
+                      <div style={styles.chatContainer}>
+                        <div style={styles.messages}>
+                          {messages.map((msg, i) => (
+                            <div
+                              key={i}
+                              style={{
+                                ...styles.message,
+                                alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start',
+                                backgroundColor: msg.sender === 'user' ? '#DCF8C6' : '#FFF'
+                              }}
+                            >
+                              {msg.text}
+                            </div>
+                          ))}
+                        </div>
+                        <div style={styles.inputContainer}>
+                          <input
+                            style={styles.input}
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            placeholder="Type a message..."
+                          />
+                          <button style={styles.button} onClick={handleSend}>Send</button>
+                        </div>
+                      </div>
                     </Paper>
                   </Grid>
                 </Grid>

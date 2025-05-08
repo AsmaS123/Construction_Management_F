@@ -36,6 +36,8 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import SiteDetailInvoiceReport from '../SiteDetailInvoiceReport/SiteDetailInvoiceReport';
+import { textAlign } from 'html2canvas/dist/types/css/property-descriptors/text-align';
+import { fontStyle } from 'html2canvas/dist/types/css/property-descriptors/font-style';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -96,24 +98,40 @@ const SiteDetailExpensesList = () => {
       let debitTotal = 0;
       let totalAmount = 0;
       //calculate credit total
-      debugger
-      if(data && data.site.client_expenses_status == 'credited'){
-        (data.expenses).map((elm:any)=>{
-          if(elm.amount && typeof(elm.amount) == 'string'){
-            creditTotal += parseInt(elm.amount)
-          }
-          else{
-            creditTotal += elm.amount
-          }
-        })
+      if(object.key =='client'){
+        debugger
+        if(data && data.site.client_expenses_status == 'credited'){
+          (data.expenses).map((elm:any)=>{
+            if(elm.amount && typeof(elm.amount) == 'string'){
+              creditTotal += parseInt(elm.amount)
+            }
+            else{
+              creditTotal += elm.amount
+            }
+          })
+        }
+        totalAmount = creditTotal
+        setTotal({...total,creditTotal,totalAmount, debitTotal  })
       }
-      totalAmount = creditTotal
-      setTotal({...total,creditTotal,totalAmount, debitTotal  })
+      if(object.key =='contractor'){
+        // if(data && data.site.client_expenses_status == 'debited'){
+          (data.expenses).map((elm:any)=>{
+            if(elm.amount && typeof(elm.amount) == 'string'){
+              debitTotal += parseInt(elm.amount)
+            }
+            else{
+              debitTotal += elm.amount
+            }
+          })
+        // }
+        totalAmount = debitTotal
+        setTotal({...total,creditTotal,totalAmount, debitTotal  })
+      }
     }
 
   function fetchData(){
     debugger
-    const url = apiurl + "siteexpenses/"+object.id;
+    const url = apiurl + "siteexpenses/"+object.key+'/'+object.id;
     axios.get(url).then((res:any)=>{
       // debugger
       setData(res.data);
@@ -141,6 +159,7 @@ const SiteDetailExpensesList = () => {
   },[object.siteId,object.id,object.key])
 
   const displayImage = (_id: any)=>{
+    alert(_id)
   }
 
   return(<>
@@ -193,8 +212,8 @@ const SiteDetailExpensesList = () => {
                       <h2>Site Expenses List</h2>
                     {/* <br/> */}
                     <p><b> Site ID</b> : {object && object.siteId} ,&nbsp; &nbsp;&nbsp; &nbsp;
-                    <b> Site Type </b>: {Object.keys(data).length>0 && data.site.site_type}, &nbsp; &nbsp; &nbsp; &nbsp;<b> Site Name </b>: {Object.keys(data).length>0 && data.site.site_name}, &nbsp; &nbsp;&nbsp; &nbsp;<b> Site Engineer Name </b> : {Object.keys(data).length>0 && data.site.site_engineer_name},
-                    &nbsp; &nbsp;&nbsp; &nbsp; <b>Client Name </b> : {Object.keys(data).length>0 && data.site.client_name}
+                    {/* <b> Site Type </b>: {Object.keys(data).length>0 && data.site.site_type}, &nbsp; &nbsp; &nbsp; &nbsp;<b> Site Name </b>: {Object.keys(data).length>0 && data.site.site_name}, &nbsp; &nbsp;&nbsp; &nbsp;<b> Site Engineer Name </b> : {Object.keys(data).length>0 && data.site.site_engineer_name},
+                    &nbsp; &nbsp;&nbsp; &nbsp; <b>Client Name </b> : {Object.keys(data).length>0 && data.site.client_name} */}
                     </p>
                     <div  id='editexpenses'>
                     {/* <h3 style={{fontStyle:'italic',color:'green'}}>
@@ -257,7 +276,7 @@ const SiteDetailExpensesList = () => {
                                     {elm.amount}
                                     </TableCell>
                                     <TableCell>
-                                    {Object.keys(data).length>0 && data.site.client_expenses_status}
+                                      {object.key=='client' &&  (Object.keys(data).length>0 && data.site.client_expenses_status) }
                                     </TableCell>
                                     <TableCell>
                                     {elm.date}
@@ -266,10 +285,11 @@ const SiteDetailExpensesList = () => {
                                     <img src={elm.engineer_signature} alt="Preview" style={{ width: '150px' }} />
                                     </TableCell>
                                     <TableCell>
-                                    <img src={elm.client_signature} alt="Preview" style={{ width: '300px' }} />
+                                      {object.key=='client' &&  <> <img src={elm.client_signature} alt="Preview" style={{ width: '300px' }} /></>}
+                                      {object.key=='contractor' &&  <> <img src={elm.contractor_signature} alt="Preview" style={{ width: '300px' }} /></>}
                                     </TableCell>
                                     <TableCell>
-                                    <a onClick={()=>displayImage(elm._id)}>{elm.attachment && elm.attachment.name}</a>
+                                    <a onClick={()=>displayImage(elm._id)} style={{textDecoration:'underline',cursor:'pointer'}}>{elm.attachment && elm.attachment.name}</a>
                                     </TableCell>
                                   <TableCell>
                                   <button >

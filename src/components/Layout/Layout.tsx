@@ -18,7 +18,7 @@ import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-
+import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useContext, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -93,6 +93,7 @@ const defaultTheme = createTheme();
 const Layout = () => {
   const [open, setOpen] = React.useState(false);
   const [role,setRoles]:any= useState([]);
+  const navigate = useNavigate();
   // debugger
   // let user:any = useSelector((state) => state );
   // setRoles(user.roles)
@@ -165,12 +166,13 @@ const Layout = () => {
             Dashboard
           </Typography>
           <IconButton color="inherit">
-          <img src="/chatgpt_icon.jpg" alt="Example" width="25"/>
+          <img src="/chatgpt_icon.jpg" alt="Example" width="25" onClick={()=>navigate('/chatbot')}/>
             </IconButton>
           <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
+            <AccountCircle/>
+            {/* <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
-            </Badge>
+            </Badge> */}
           </IconButton>
         </Toolbar>
       </AppBar>

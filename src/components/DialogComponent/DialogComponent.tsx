@@ -1,4 +1,4 @@
-import React, { FC, forwardRef, useEffect,useImperativeHandle } from 'react';
+import React, { FC, forwardRef, useEffect,useImperativeHandle, useState } from 'react';
 import styles from './DialogComponent.module.css';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -37,6 +37,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 const DialogComponent = forwardRef((props:any, ref:any) => {
   const [open, setOpen] = React.useState(false);
+  const [keyVal, setKeyVal] = useState(props.urlKey+'_signature');
 
   useImperativeHandle(ref, () => ({
     handleClose
@@ -49,20 +50,44 @@ const DialogComponent = forwardRef((props:any, ref:any) => {
     setOpen(false);
   };
 
+  const clientCxpenses:any ={
+    site_id: props.site_id,
+    site:props.id,
+    expenses:{
+    bank_detail:'',
+    amount:0,
+    date: '',
+    client_signature :  '',
+    engineer_signature:'',
+    payment_mode:'',
+    attachment:null 
+  }
+}
+
+  const contractorExpenses:any ={
+    site_id: props.site_id,
+    contractor:props.id,
+    expenses:{
+    bank_detail:'',
+    amount:0,
+    date: '',
+    contractor_signature :  '',
+    engineer_signature:'',
+    payment_mode:'',
+    attachment:null 
+  }
+}
+
     const formik = useFormik({
-            initialValues: {
-              site:props.id,
-              site_id: props.site_id,
-              expenses:{
-                bank_detail:'',
-                amount:0,
-                date: '',
-                client_signature :  '',
-                engineer_signature:'',
-                payment_mode:'',
-                attachment:null 
-              }
-            },
+              initialValues :
+                (props.urlKey == 'client' && clientCxpenses) || (props.urlKey == 'contractor' && contractorExpenses),
+              
+            // initialValues: {
+            //   site_id: props.site_id,
+            //   site:props.id,
+              
+            //   expenses: (props.urlKey == 'client' && clientCxpenses) || (props.urlKey == 'contractor' && contractorExpenses)
+            // },
             // validationSchema: SiteSchema,
             // Submission handler
             onSubmit: (values:any) => {
@@ -73,23 +98,31 @@ const DialogComponent = forwardRef((props:any, ref:any) => {
 
 const formDataObj = (obj: any)=>{
   const formData = new FormData();
-  formData.append('site', obj.site);
+  if(props.urlKey == 'client'){
+    formData.append('site', obj.site);
+    formData.append('expenses[client_signature]', obj.expenses.client_signature);
+  }
+  else if(props.urlKey == 'contractor'){
+    formData.append('contractor', obj.contractor);
+    formData.append('expenses[contractor_signature]', obj.expenses.contractor_signature);
+  }
   formData.append('site_id', obj.site_id);
   formData.append('expenses[bank_detail]', obj.expenses.bank_detail);
   formData.append('expenses[amount]', obj.expenses.amount);
   formData.append('expenses[date]', obj.expenses.date);
-  formData.append('expenses[client_signature]', obj.expenses.client_signature);
   formData.append('expenses[engineer_signature]', obj.expenses.engineer_signature);
   formData.append('expenses[payment_mode]', obj.expenses.payment_mode);
   formData.append('expenses[attachment]', obj.expenses.attachment);
   return formData
 };
+
 const handleSubmit = (e:any)=>{
     e.preventDefault()
     debugger
     const obj = formik.values;
-    // console.log(obj.expenses.attachment);
+    console.log(obj)
     const formData = formDataObj(obj);
+
     const url = apiurl + "siteexpenses/create/"+props.urlKey;
     axios.post(url,formData).then((res:any)=>{
       // setOpen(false);
@@ -100,10 +133,16 @@ const handleSubmit = (e:any)=>{
     })
   }
 
-  useEffect(()=>{
-    debugger;
-    console.log(props)
-  },[])
+  // useEffect(()=>{
+  //   debugger;
+  //   console.log(props.urlKey)
+  //   if(props.urlKey == 'client'){
+  //     expensesObj.client_signature = '';
+  //   }
+  //   else if(props.urlKey == 'contractor'){
+  //     expensesObj.contractor_signature = '';
+  //   }
+  // },[props.urlKey])
 return (<>
   {/* <React.Fragment> */}
 
@@ -121,7 +160,7 @@ return (<>
         open={open}
       >
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-          Expenses
+        {props.urlKey} Expenses
         </DialogTitle>
         <IconButton
           aria-label="close"
@@ -136,7 +175,7 @@ return (<>
           {/* <CloseIcon /> */}
         </IconButton>
         <DialogContent dividers>
-        {props.urlKey}
+     
          {/* return (<> */}
           <Grid container spacing={2}>
             <Grid item xs={12} lg={6} md={6}>
@@ -233,12 +272,14 @@ return (<>
             <br/>
             <Grid container spacing={2}>
             <Grid item xs={12} lg={6} md={6}>
-            engineer signature 
+            Engineer signature 
               <DigitalSignature handleClientSignature={(e:any)=>formik.setFieldValue(`expenses.engineer_signature`, e)}/>
               </Grid>
               <Grid item xs={12} lg={6} md={6}>
-              client signature
-                <DigitalSignature handleClientSignature={(e:any)=>formik.setFieldValue(`expenses.client_signature`, e)}/>
+                { props.urlKey=='client' && <> client signature
+                  <DigitalSignature handleClientSignature={(e:any)=>formik.setFieldValue(`expenses.client_signature`, e)}/></>}
+                  { props.urlKey=='contractor' && <> Contractor signature
+                    <DigitalSignature handleClientSignature={(e:any)=>formik.setFieldValue(`expenses.contractor_signature`, e)}/></> }
               </Grid>
             </Grid>
             {/* </>) */}
