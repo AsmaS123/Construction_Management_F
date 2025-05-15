@@ -1,5 +1,5 @@
 /* eslint-disable */
-import Office from './Office';
+import Office from "./Office";
 
 export default {
   title: "Office",
@@ -8,5 +8,5 @@ export default {
 export const Default = () => <Office />;
 
 Default.story = {
-  name: 'default',
+  name: "default",
 };

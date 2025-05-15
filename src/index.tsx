@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorComponent from "./error.component";
 // import '../../node_modules/react-toastify/dist/ReactToastify.css';
+import { Backdrop, CircularProgress } from "@mui/material";
 import ".././node_modules/react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(

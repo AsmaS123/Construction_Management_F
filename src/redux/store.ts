@@ -16,5 +16,5 @@ import { thunk } from "redux-thunk";
 // Create Redux store with middleware applied
 export const store = createStore(
   RolesInfoReducer,
-  applyMiddleware(thunk) // Apply middleware
+  applyMiddleware(thunk), // Apply middleware
 );

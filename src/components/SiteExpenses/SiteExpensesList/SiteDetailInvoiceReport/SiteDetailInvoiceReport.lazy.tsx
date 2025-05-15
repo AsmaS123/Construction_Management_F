@@ -1,8 +1,12 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense } from "react";
 
-const LazySiteDetailInvoiceReport = lazy(() => import('./SiteDetailInvoiceReport'));
+const LazySiteDetailInvoiceReport = lazy(
+  () => import("./SiteDetailInvoiceReport"),
+);
 
-const SiteDetailInvoiceReport = (props: JSX.IntrinsicAttributes & { children?: React.ReactNode; }) => (
+const SiteDetailInvoiceReport = (
+  props: JSX.IntrinsicAttributes & { children?: React.ReactNode },
+) => (
   <Suspense fallback={null}>
     <LazySiteDetailInvoiceReport {...props} />
   </Suspense>

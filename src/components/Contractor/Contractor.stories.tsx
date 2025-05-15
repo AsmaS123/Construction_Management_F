@@ -1,5 +1,5 @@
 /* eslint-disable */
-import Contractor from './Contractor';
+import Contractor from "./Contractor";
 
 export default {
   title: "Contractor",
@@ -8,5 +8,5 @@ export default {
 export const Default = () => <Contractor />;
 
 Default.story = {
-  name: 'default',
+  name: "default",
 };

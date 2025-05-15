@@ -1,5 +1,5 @@
 /* eslint-disable */
-import DigitalSignature from './DigitalSignature';
+import DigitalSignature from "./DigitalSignature";
 
 export default {
   title: "DigitalSignature",
@@ -8,5 +8,5 @@ export default {
 export const Default = () => <DigitalSignature />;
 
 Default.story = {
-  name: 'default',
+  name: "default",
 };

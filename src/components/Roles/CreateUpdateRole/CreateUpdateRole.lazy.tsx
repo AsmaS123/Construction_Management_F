@@ -1,8 +1,10 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense } from "react";
 
-const LazyCreateUpdateRole = lazy(() => import('./CreateUpdateRole'));
+const LazyCreateUpdateRole = lazy(() => import("./CreateUpdateRole"));
 
-const CreateUpdateRole = (props: JSX.IntrinsicAttributes & { children?: React.ReactNode; }) => (
+const CreateUpdateRole = (
+  props: JSX.IntrinsicAttributes & { children?: React.ReactNode },
+) => (
   <Suspense fallback={null}>
     <LazyCreateUpdateRole {...props} />
   </Suspense>

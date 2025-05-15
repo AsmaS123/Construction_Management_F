@@ -1,5 +1,5 @@
 /* eslint-disable */
-import PasswordInput from './PasswordInput';
+import PasswordInput from "./PasswordInput";
 
 export default {
   title: "PasswordInput",
@@ -8,5 +8,5 @@ export default {
 export const Default = () => <PasswordInput />;
 
 Default.story = {
-  name: 'default',
+  name: "default",
 };

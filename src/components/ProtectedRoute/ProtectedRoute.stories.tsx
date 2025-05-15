@@ -1,5 +1,5 @@
 /* eslint-disable */
-import ProtectedRoute from './ProtectedRoute';
+import ProtectedRoute from "./ProtectedRoute";
 
 export default {
   title: "ProtectedRoute",
@@ -8,5 +8,5 @@ export default {
 export const Default = () => <ProtectedRoute />;
 
 Default.story = {
-  name: 'default',
+  name: "default",
 };

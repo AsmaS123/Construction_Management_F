@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import styles from './Office.module.css';
+import React, { FC } from "react";
+import styles from "./Office.module.css";
 
 interface OfficeProps {}
 

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import Roles from './Roles';
+import Roles from "./Roles";
 
 export default {
   title: "Roles",
@@ -8,5 +8,5 @@ export default {
 export const Default = () => <Roles />;
 
 Default.story = {
-  name: 'default',
+  name: "default",
 };

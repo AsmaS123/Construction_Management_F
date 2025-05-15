@@ -1,5 +1,5 @@
 /* eslint-disable */
-import ChatBot from './ChatBot';
+import ChatBot from "./ChatBot";
 
 export default {
   title: "ChatBot",
@@ -8,5 +8,5 @@ export default {
 export const Default = () => <ChatBot />;
 
 Default.story = {
-  name: 'default',
+  name: "default",
 };

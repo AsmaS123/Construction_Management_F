@@ -39,25 +39,97 @@ export const ClassRoomList: IClassRoomList[] = [
   // {name: 'Computer Lab', classroom_id:'class_computer_lab'}
 ];
 
-
 export const ClassBasedSubjectList = [
   {
-    name: "Senior KG", grade: 0, section: ["A", "B"], subject:["English","Hindi","Marathi","Science","Mathematics","Drawing"]
+    name: "Senior KG",
+    grade: 0,
+    section: ["A", "B"],
+    subject: [
+      "English",
+      "Hindi",
+      "Marathi",
+      "Science",
+      "Mathematics",
+      "Drawing",
+    ],
   },
   {
-    name: "I", grade: 1, section: ["A", "B", "C", "D"], subject:['English','Hindi','Marathi','Science','Mathematics','History','Geography','Drawing']
+    name: "I",
+    grade: 1,
+    section: ["A", "B", "C", "D"],
+    subject: [
+      "English",
+      "Hindi",
+      "Marathi",
+      "Science",
+      "Mathematics",
+      "History",
+      "Geography",
+      "Drawing",
+    ],
   },
   {
-    name: "II", grade: 2, section: ["A", "B", "C", "D"], subject:['English','Hindi','Marathi','Science','Mathematics','History','Geography','Drawing','Economics']
+    name: "II",
+    grade: 2,
+    section: ["A", "B", "C", "D"],
+    subject: [
+      "English",
+      "Hindi",
+      "Marathi",
+      "Science",
+      "Mathematics",
+      "History",
+      "Geography",
+      "Drawing",
+      "Economics",
+    ],
   },
   {
-    name: "III", grade: 3, section: ["A", "B", "C", "D"], subject:['English','Hindi','Marathi','Science','Mathematics','History','Geography','Drawing','Economics']
+    name: "III",
+    grade: 3,
+    section: ["A", "B", "C", "D"],
+    subject: [
+      "English",
+      "Hindi",
+      "Marathi",
+      "Science",
+      "Mathematics",
+      "History",
+      "Geography",
+      "Drawing",
+      "Economics",
+    ],
   },
   {
-    name: "IV", grade: 4, section: ["A", "B", "C", "D"], subject:['English','Hindi','Marathi','Science','Mathematics','History','Geography','Drawing','Economics']
+    name: "IV",
+    grade: 4,
+    section: ["A", "B", "C", "D"],
+    subject: [
+      "English",
+      "Hindi",
+      "Marathi",
+      "Science",
+      "Mathematics",
+      "History",
+      "Geography",
+      "Drawing",
+      "Economics",
+    ],
   },
   {
-    name: "V", grade: 5, section: ["A", "B", "C", "D"], subject:['English','Hindi','Marathi','Science','Mathematics','History','Geography','Drawing','Economics']
-  }
-]
-
+    name: "V",
+    grade: 5,
+    section: ["A", "B", "C", "D"],
+    subject: [
+      "English",
+      "Hindi",
+      "Marathi",
+      "Science",
+      "Mathematics",
+      "History",
+      "Geography",
+      "Drawing",
+      "Economics",
+    ],
+  },
+];

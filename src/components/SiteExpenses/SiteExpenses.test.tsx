@@ -1,13 +1,13 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
-import SiteExpenses from './SiteExpenses';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+import SiteExpenses from "./SiteExpenses";
 
-describe('<SiteExpenses />', () => {
-  test('it should mount', () => {
+describe("<SiteExpenses />", () => {
+  test("it should mount", () => {
     render(<SiteExpenses />);
-    
-    const siteExpenses = screen.getByTestId('SiteExpenses');
+
+    const siteExpenses = screen.getByTestId("SiteExpenses");
 
     expect(siteExpenses).toBeInTheDocument();
   });

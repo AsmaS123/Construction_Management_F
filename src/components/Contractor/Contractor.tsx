@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import styles from './Contractor.module.css';
+import React, { FC } from "react";
+import styles from "./Contractor.module.css";
 
 interface ContractorProps {}
 

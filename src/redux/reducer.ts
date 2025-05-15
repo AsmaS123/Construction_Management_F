@@ -1,31 +1,30 @@
 import { SETUSER, GETUSER } from "./actions";
 
 const initialStateRolesInfo = {
-  email:'',
-  roles:[]
-}
+  email: "",
+  roles: [],
+};
 
-export const RolesInfoReducer = (state = initialStateRolesInfo, action:{ type: any; payload: any }) => {
+export const RolesInfoReducer = (
+  state = initialStateRolesInfo,
+  action: { type: any; payload: any },
+) => {
   // debugger
-  if(action.type == SETUSER){
+  if (action.type == SETUSER) {
     return {
       ...state,
       email: action.payload.email,
       roles: action.payload.roles,
     };
-  }  
-  else if(action.type == GETUSER){
+  } else if (action.type == GETUSER) {
     return {
       email: state.email,
       roles: state.roles,
     };
-  }
-  else{
+  } else {
     return state;
   }
-}
-
-
+};
 
 // const initialState = {
 //   token: "",
@@ -63,7 +62,6 @@ export const RolesInfoReducer = (state = initialStateRolesInfo, action:{ type: a
 //   }
 // }
 
-
 // export const rootReducer = (
 //   state = initialState,
 //   action: { type: any; payload: any },
@@ -87,8 +85,6 @@ export const RolesInfoReducer = (state = initialStateRolesInfo, action:{ type: a
 //       return state;
 //   }
 // };
-
-
 
 // export const timetablereducer = (
 //   state = initialtimetable,
@@ -124,9 +120,4 @@ export const RolesInfoReducer = (state = initialStateRolesInfo, action:{ type: a
 //   }
 // };
 
-
-
-
 // export default rootReducer;
-
-

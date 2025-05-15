@@ -1,5 +1,5 @@
 /* eslint-disable */
-import SiteDetailExpensesList from './SiteDetailExpensesList';
+import SiteDetailExpensesList from "./SiteDetailExpensesList";
 
 export default {
   title: "SiteDetailExpensesList",
@@ -8,5 +8,5 @@ export default {
 export const Default = () => <SiteDetailExpensesList />;
 
 Default.story = {
-  name: 'default',
+  name: "default",
 };

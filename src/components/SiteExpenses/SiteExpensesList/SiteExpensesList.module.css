@@ -1,7 +1,8 @@
-.SiteExpensesList {}
+.SiteExpensesList {
+}
 
 @media print {
-    editexpenses {
-      display: none; /* Hide buttons during printing */
-    }
+  editexpenses {
+    display: none; /* Hide buttons during printing */
   }
+}

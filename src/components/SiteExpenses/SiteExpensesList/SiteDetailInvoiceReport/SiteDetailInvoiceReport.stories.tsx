@@ -1,5 +1,5 @@
 /* eslint-disable */
-import SiteDetailInvoiceReport from './SiteDetailInvoiceReport';
+import SiteDetailInvoiceReport from "./SiteDetailInvoiceReport";
 
 export default {
   title: "SiteDetailInvoiceReport",
@@ -8,5 +8,5 @@ export default {
 export const Default = () => <SiteDetailInvoiceReport />;
 
 Default.story = {
-  name: 'default',
+  name: "default",
 };

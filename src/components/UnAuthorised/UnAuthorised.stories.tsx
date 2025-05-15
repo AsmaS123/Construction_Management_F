@@ -1,5 +1,5 @@
 /* eslint-disable */
-import UnAuthorised from './UnAuthorised';
+import UnAuthorised from "./UnAuthorised";
 
 export default {
   title: "UnAuthorised",
@@ -8,5 +8,5 @@ export default {
 export const Default = () => <UnAuthorised />;
 
 Default.story = {
-  name: 'default',
+  name: "default",
 };

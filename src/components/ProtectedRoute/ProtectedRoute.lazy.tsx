@@ -1,8 +1,10 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense } from "react";
 
-const LazyProtectedRoute = lazy(() => import('./ProtectedRoute'));
+const LazyProtectedRoute = lazy(() => import("./ProtectedRoute"));
 
-const ProtectedRoute = (props: JSX.IntrinsicAttributes & { children?: React.ReactNode; }) => (
+const ProtectedRoute = (
+  props: JSX.IntrinsicAttributes & { children?: React.ReactNode },
+) => (
   <Suspense fallback={null}>
     <LazyProtectedRoute {...props} />
   </Suspense>

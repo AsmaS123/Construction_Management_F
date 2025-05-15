@@ -1,8 +1,10 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense } from "react";
 
-const LazyUpdateSite = lazy(() => import('./UpdateSite'));
+const LazyUpdateSite = lazy(() => import("./UpdateSite"));
 
-const UpdateSite = (props: JSX.IntrinsicAttributes & { children?: React.ReactNode; }) => (
+const UpdateSite = (
+  props: JSX.IntrinsicAttributes & { children?: React.ReactNode },
+) => (
   <Suspense fallback={null}>
     <LazyUpdateSite {...props} />
   </Suspense>

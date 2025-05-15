@@ -1,5 +1,5 @@
 /* eslint-disable */
-import DialogComponent from './DialogComponent';
+import DialogComponent from "./DialogComponent";
 
 export default {
   title: "DialogComponent",
@@ -8,5 +8,5 @@ export default {
 export const Default = () => <DialogComponent />;
 
 Default.story = {
-  name: 'default',
+  name: "default",
 };

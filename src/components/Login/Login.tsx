@@ -1,4 +1,4 @@
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
 import {
   Avatar,
   Button,
@@ -14,22 +14,23 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios'
-import { useFormik } from 'formik';
+import axios from "axios";
+import { useFormik } from "formik";
 import * as Yup from "yup";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import PasswordInput from "../PasswordInput/PasswordInput";
 import apiurl from "../../config/url";
-import { useDispatch } from 'react-redux';
-import { setuser, getuser } from '../../redux/actions';
-import Auth from '../../middleware/auth';
+import { useDispatch } from "react-redux";
+import { setuser, getuser } from "../../redux/actions";
+import Auth from "../../middleware/auth";
+import { ToastContainer } from "react-toastify";
 
 const defaultTheme = createTheme();
 
 export default function Login() {
   const navigate = useNavigate();
-  const [error, setError] = useState(null);
-  const [roles,setRoles] = useState([]);
+  // const [error, setError] = useState(null);
+  const [roles, setRoles] = useState([]);
   const dispatch = useDispatch();
   const authservice = Auth();
   const handleSubmit = (event: {
@@ -41,59 +42,76 @@ export default function Login() {
     login();
   };
 
-   const LoginSchema = Yup.object().shape({
-      email:Yup.string().required("email is required"),
-      password:Yup.string().required("password is required"),
-   });
+  const LoginSchema = Yup.object().shape({
+    email: Yup.string().required("email is required"),
+    password: Yup.string().required("password is required"),
+  });
 
   const formik = useFormik({
-      initialValues: {
-        email:'',
-        password:'',
-      },
-      validationSchema: LoginSchema,
-      onSubmit: (values) => {
-        // console.log(values);
-      },
-    });
-  
-   function login() {
-    const data  = formik.values;
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: LoginSchema,
+    onSubmit: (values) => {
+      // console.log(values);
+    },
+  });
+
+  function login() {
+    const data = formik.values;
     const url = apiurl + "login";
 
-      axios.post(url, data,{ withCredentials: true }).then((res)=>{
+    axios
+      .post(url, data)
+      .then((res) => {
         // debugger
         const data = res.data;
-        const user :any= {
-          email:data.email,
-          roles: data.roles
-        }
+        const user: any = {
+          email: data.email,
+          roles: data.roles,
+        };
         dispatch(setuser(user));
         // Create a Date object 1 hour from now
         const inOneHour = new Date(new Date().getTime() + 60 * 60 * 1000);
-        Cookies.set('user', JSON.stringify(user),{ expires: inOneHour, secure: true })
+        Cookies.set("user", JSON.stringify(user), {
+          expires: inOneHour,
+          secure: true,
+        });
         // Cookies.set('useremail', user.email, { expires: 7, secure: true });
         navigate("/dashboard");
-      }).catch((errr)=>{
-        setError(errr.message);
       })
-    } 
-  
+      .catch((errr) => {
+        // setError(errr.message);
+      });
+  }
 
   const handleChange = () => {
     navigate("/signup");
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     // debugger
-    if(authservice){
+    if (authservice) {
       navigate("/dashboard");
     }
-  },[])
+  }, []);
 
   return (
     <ThemeProvider theme={defaultTheme} data-testid="Login">
       <Container component="main" maxWidth="xs">
+        {/* <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        /> */}
         <CssBaseline />
         <Box
           sx={{
@@ -132,12 +150,12 @@ export default function Login() {
             />
 
             <PasswordInput
-                password={formik.values.password}
-                // handlePassword={(e:any) => setPassword(e.target.value)}
-                handlePassword={formik.handleChange}
-                handleBlur={formik.handleBlur}
-                formik={formik}
-              />
+              password={formik.values.password}
+              // handlePassword={(e:any) => setPassword(e.target.value)}
+              handlePassword={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              formik={formik}
+            />
             <Button
               type="submit"
               fullWidth
@@ -147,7 +165,7 @@ export default function Login() {
               // onClick={login}
             >
               Sign In
-            </Button>            
+            </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
@@ -166,12 +184,3 @@ export default function Login() {
     </ThemeProvider>
   );
 }
-
-
-
-
-
-
-
-
-         

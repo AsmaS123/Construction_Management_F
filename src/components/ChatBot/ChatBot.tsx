@@ -1,18 +1,18 @@
 import React, { FC, useEffect } from "react";
 import styles from "./Dashboard.module.css";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import {  useState } from "react";
+import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Layout from "../Layout/Layout";
-import axios from 'axios'
-import GetUserRoles from '../CustomHook/GetUserRoles/GetUserRoles';
+import axios from "axios";
+import GetUserRoles from "../CustomHook/GetUserRoles/GetUserRoles";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -22,64 +22,63 @@ export default function ChatBot() {
     chatContainer: {
       // width: '300px',
       // height: '400px',
-      border: '1px solid #ccc',
+      border: "1px solid #ccc",
       // display: 'flex',
       // flexDirection:'column',
       // flexDirection: 'column',
-      fontFamily: 'Arial, sans-serif'
+      fontFamily: "Arial, sans-serif",
     },
     messages: {
       flex: 1,
-      padding: '10px',
+      padding: "10px",
       // overflowY: 'auto',
       // display: 'flex',
       // flexDirection: 'column',
-      gap: '5px'
+      gap: "5px",
     },
     message: {
-      maxWidth: '70%',
-      padding: '8px 12px',
-      borderRadius: '10px',
-      border: '1px solid #ddd'
+      maxWidth: "70%",
+      padding: "8px 12px",
+      borderRadius: "10px",
+      border: "1px solid #ddd",
     },
     inputContainer: {
-      display: 'flex',
-      padding: '10px',
-      borderTop: '1px solid #ccc'
+      display: "flex",
+      padding: "10px",
+      borderTop: "1px solid #ccc",
     },
     input: {
       flex: 1,
-      padding: '8px',
-      fontSize: '14px'
+      padding: "8px",
+      fontSize: "14px",
     },
     button: {
-      marginLeft: '10px',
-      padding: '8px 12px'
-    }
+      marginLeft: "10px",
+      padding: "8px 12px",
+    },
   };
-  
+
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, []);
 
   const [messages, setMessages] = useState([
-    { sender: 'bot', text: 'Hi! How can I help you?' }
+    { sender: "bot", text: "Hi! How can I help you?" },
   ]);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
 
   const handleSend = () => {
     if (!input.trim()) return;
 
-    const newUserMessage = { sender: 'user', text: input };
-    setMessages(prev => [...prev, newUserMessage]);
+    const newUserMessage = { sender: "user", text: input };
+    setMessages((prev) => [...prev, newUserMessage]);
 
     // Simulate bot response
     setTimeout(() => {
-      const botMessage = { sender: 'bot', text: `You said: "${input}"` };
-      setMessages(prev => [...prev, botMessage]);
+      const botMessage = { sender: "bot", text: `You said: "${input}"` };
+      setMessages((prev) => [...prev, botMessage]);
     }, 1000);
 
-    setInput('');
+    setInput("");
   };
 
   return (
@@ -116,8 +115,12 @@ export default function ChatBot() {
                               key={i}
                               style={{
                                 ...styles.message,
-                                alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start',
-                                backgroundColor: msg.sender === 'user' ? '#DCF8C6' : '#FFF'
+                                alignSelf:
+                                  msg.sender === "user"
+                                    ? "flex-end"
+                                    : "flex-start",
+                                backgroundColor:
+                                  msg.sender === "user" ? "#DCF8C6" : "#FFF",
                               }}
                             >
                               {msg.text}
@@ -131,7 +134,9 @@ export default function ChatBot() {
                             onChange={(e) => setInput(e.target.value)}
                             placeholder="Type a message..."
                           />
-                          <button style={styles.button} onClick={handleSend}>Send</button>
+                          <button style={styles.button} onClick={handleSend}>
+                            Send
+                          </button>
                         </div>
                       </div>
                     </Paper>
@@ -145,4 +150,3 @@ export default function ChatBot() {
     </>
   );
 }
-

@@ -1,12 +1,17 @@
-import React, { FC } from 'react';
-import styles from './PasswordInput.module.css';
+import React, { FC } from "react";
+import styles from "./PasswordInput.module.css";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
 
 interface PasswordInputProps {}
 
-const PasswordInput = ({ password, handlePassword ,handleBlur,formik}:any) => {
+const PasswordInput = ({
+  password,
+  handlePassword,
+  handleBlur,
+  formik,
+}: any) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => {

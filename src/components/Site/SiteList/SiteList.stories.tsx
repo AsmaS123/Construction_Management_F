@@ -1,5 +1,5 @@
 /* eslint-disable */
-import SiteList from './SiteList';
+import SiteList from "./SiteList";
 
 export default {
   title: "SiteList",
@@ -8,5 +8,5 @@ export default {
 export const Default = () => <SiteList />;
 
 Default.story = {
-  name: 'default',
+  name: "default",
 };

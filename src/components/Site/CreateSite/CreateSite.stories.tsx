@@ -1,5 +1,5 @@
 /* eslint-disable */
-import CreateSite from './CreateSite';
+import CreateSite from "./CreateSite";
 
 export default {
   title: "CreateSite",
@@ -8,5 +8,5 @@ export default {
 export const Default = () => <CreateSite />;
 
 Default.story = {
-  name: 'default',
+  name: "default",
 };

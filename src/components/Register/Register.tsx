@@ -13,10 +13,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import apiurl from "../../config/url";
-import {TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import PasswordInput from "../PasswordInput/PasswordInput";
-import { useFormik } from 'formik';
+import { useFormik } from "formik";
 import * as Yup from "yup";
+import { toast, ToastContainer } from "react-toastify";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -31,25 +32,25 @@ const defaultTheme = createTheme();
 export default function Register() {
   const navigate = useNavigate();
   const SignUpSchema = Yup.object().shape({
-        name:Yup.string().required("user name is required"),
-        email:Yup.string().required("email is required"),
-        password:Yup.string().required("password is required"),
-        roles:Yup.array()
-     });
+    name: Yup.string().required("user name is required"),
+    email: Yup.string().required("email is required"),
+    password: Yup.string().required("password is required"),
+    roles: Yup.array(),
+  });
 
   const formik = useFormik({
-      initialValues: {
-        name:'',
-        email:'',
-        password:'',
-        roles:['user']
-      },
-      validationSchema: SignUpSchema,
-      onSubmit: (values) => {
-        // console.log(values);
-      },
-    });
-      
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      roles: ["user"],
+    },
+    validationSchema: SignUpSchema,
+    onSubmit: (values) => {
+      // console.log(values);
+    },
+  });
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // debugger
@@ -59,10 +60,13 @@ export default function Register() {
     axios
       .post(url, obj)
       .then((res: any) => {
+        debugger;
+        toast.success("Registeration completed successfully", {
+          position: "top-center",
+        });
         navigate("/");
       })
-      .catch((error) => {
-      });
+      .catch((error) => {});
   };
 
   const handleChange = () => {
@@ -72,6 +76,18 @@ export default function Register() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
         <CssBaseline />
         <Box
           sx={{
@@ -126,7 +142,7 @@ export default function Register() {
               </Grid>
 
               <Grid item xs={12}>
-              <PasswordInput
+                <PasswordInput
                   password={formik.values.password}
                   // handlePassword={(e:any) => setPassword(e.target.value)}
                   handlePassword={formik.handleChange}
@@ -158,4 +174,3 @@ export default function Register() {
     </ThemeProvider>
   );
 }
-

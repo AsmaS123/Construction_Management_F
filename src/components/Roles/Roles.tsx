@@ -7,12 +7,13 @@ import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import {  useState } from "react";
+import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Layout from "../Layout/Layout";
 import RoleList from "./RoleList/RoleList";
-import CreateUpdateRole from './CreateUpdateRole/CreateUpdateRole';
+import CreateUpdateRole from "./CreateUpdateRole/CreateUpdateRole";
+import { toast } from "react-toastify";
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
@@ -20,17 +21,16 @@ export default function Roles() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
-  const [userData,setUserDat ] = useState({})
+  const [userData, setUserDat] = useState({});
   useEffect(() => {}, []);
 
-  
-  const handleVisibility = (status:any) => {
+  const handleVisibility = (status: any) => {
     setVisible(status);
   };
 
-  const handleRowData = (row:any)=>{
-    setUserDat(row)
-  }
+  const handleRowData = (row: any) => {
+    setUserDat(row);
+  };
   return (
     <>
       {loading && (
@@ -50,8 +50,18 @@ export default function Roles() {
               }}
             >
               <Toolbar />
-              {!visible && <RoleList updateVisibility={handleVisibility} rowData={handleRowData}/>}
-              {visible && <CreateUpdateRole childData={userData} updateVisibility={handleVisibility}/>}
+              {!visible && (
+                <RoleList
+                  updateVisibility={handleVisibility}
+                  rowData={handleRowData}
+                />
+              )}
+              {visible && (
+                <CreateUpdateRole
+                  childData={userData}
+                  updateVisibility={handleVisibility}
+                />
+              )}
             </Box>
           </Box>
         </ThemeProvider>
