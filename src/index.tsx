@@ -10,6 +10,7 @@ import ErrorComponent from "./error.component";
 // import '../../node_modules/react-toastify/dist/ReactToastify.css';
 import { Backdrop, CircularProgress } from "@mui/material";
 import ".././node_modules/react-toastify/dist/ReactToastify.css";
+// import  { LoaderProvider } from '../../middleware/'
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,

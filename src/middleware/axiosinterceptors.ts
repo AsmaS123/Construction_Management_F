@@ -32,26 +32,26 @@ axiosInstance.interceptors.response.use(
       console.error("Network error");
       toast.error("Network error. Please check your connection.");
     } else {
-      if (response.data && response.data.message) {
-        toast.error(response.data.message, { position: "top-center" });
-      } else {
-        switch (response.status) {
-          case 401:
-            toast.error("Unauthorized. Please log in again.");
-            // redirect to login or clear token
-            break;
-          case 403:
-            toast.error("Access denied.");
-            break;
-          case 404:
-            toast.error("Resource not found.", { position: "top-center" });
-            break;
-          case 500:
-            toast.error("Server error. Please try again later.");
-            break;
-          default:
-            toast.error(response.data?.message || "Something went wrong.");
-        }
+      // if (response.data && response.data.message) {
+      //   toast.error(response.data.message, { position: "top-center" });
+      // } else {
+      switch (response.status) {
+        case 401:
+          toast.error("Unauthorized. Please log in again.");
+          // redirect to login or clear token
+          break;
+        case 403:
+          toast.error("Access denied.");
+          break;
+        case 404:
+          toast.error("Resource not found.", { position: "top-center" });
+          break;
+        case 500:
+          toast.error("Server error. Please try again later.");
+          break;
+        default:
+          toast.error(response.data?.message || "Something went wrong.");
+        // }
       }
       // console.error('API error:', {
       //   status: response.status,

@@ -57,7 +57,12 @@ const DialogComponent = forwardRef((props: any, ref: any) => {
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleClose = () => {
+  const handleClose = (event?: any, reason?: string) => {
+    debugger;
+    if (reason === "backdropClick" || reason === "escapeKeyDown") {
+      // Prevent close on outside click or ESC
+      return;
+    }
     setOpen(false);
   };
 
@@ -191,7 +196,7 @@ const DialogComponent = forwardRef((props: any, ref: any) => {
       </Button>
       <BootstrapDialog
         fullWidth
-        onClose={handleClose}
+        onClose={(reason) => handleClose(reason)}
         aria-labelledby="customized-dialog-title"
         open={open}
       >
@@ -200,7 +205,7 @@ const DialogComponent = forwardRef((props: any, ref: any) => {
         </DialogTitle>
         <IconButton
           aria-label="close"
-          onClick={handleClose}
+          onClick={(reason) => handleClose(reason)}
           sx={{
             position: "absolute",
             right: 8,
@@ -376,7 +381,7 @@ const DialogComponent = forwardRef((props: any, ref: any) => {
           <Button autoFocus onClick={handleSubmit}>
             Save
           </Button>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus onClick={(reason: any) => handleClose(reason)}>
             Cancel
           </Button>
         </DialogActions>

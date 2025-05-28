@@ -47,11 +47,13 @@ const CreateSite = (props: any) => {
     site_type: Yup.string().required("Site type is required"),
     site_name: Yup.string().required("site name is required"),
     site_engineer_name: Yup.string().required("site engineer name is required"),
-    site_engineer_email: Yup.string().required(
-      "site_engineer email is required",
-    ),
+    site_engineer_email: Yup.string()
+      .email("Invalid email")
+      .required("site_engineer email is required"),
     client_name: Yup.string().required("site engineer name is required"),
-    client_email: Yup.string().required("site_engineer email is required"),
+    client_email: Yup.string()
+      .email("Invalid email")
+      .required("site_engineer email is required"),
     client_contact_no: Yup.string()
       .matches(/^[0-9]{10}$/, "Mobile number must be exactly 10 digits")
       .required("Mobile number is required"),
@@ -74,7 +76,7 @@ const CreateSite = (props: any) => {
         contractor_expenses: Yup.number(),
         contractor_expenses_status: Yup.string(),
         contractor_expenses_date: Yup.string(),
-        contractor_email: Yup.string().required("contractor email is required"),
+        contractor_email: Yup.string(),
       }),
     ),
   });
@@ -570,8 +572,8 @@ const CreateSite = (props: any) => {
                               name={`contractor[${index}].contractor_name`}
                               value={elm.contractor_name}
                               onChange={formik.handleChange}
-                              // error={formik.touched.contractor?.[index]?.contractor_type && Boolean(formik.errors.contractor?.[index].contractor_type)}
-                              // helperText={formik.touched.contractor?.[index]?.contractor_type && Boolean(formik.errors.contractor?.[index])}
+                              // error={formik.touched.contractor?.[index]?.contractor_name && Boolean(formik.errors.contractor?.[index]?.contractor_name)}
+                              // helperText={formik.touched.contractor?.[index]?.contractor_name && Boolean(formik.errors.contractor?.[index]?.contractor_name)}
                             />
                           </Grid>
                           <Grid item xs={12} lg={3} md={3}>
